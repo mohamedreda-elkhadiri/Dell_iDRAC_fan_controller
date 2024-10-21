@@ -1,0 +1,17 @@
+[Unit]
+Description=Dell iDrac Fan Control Service
+
+[Service]
+Type=simple
+User=root
+Environment=IDRAC_HOST=local \
+	    FAN_SPEED=25 \
+	    CPU_TEMPERATURE_THRESHOLD=50 \
+	    CHECK_INTERVAL=20 \
+	    DISABLE_THIRD_PARTY_PCIE_CARD_DELL_DEFAULT_COOLING_RESPONSE=false
+
+ExecStart=/opt/idrac_fan_controller/bin/dell_idrac_fan_controller.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
